@@ -1,0 +1,32 @@
+{
+  "name": "three_devs/call_return",
+  "type": "library",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Tanmay Chakrabarty",
+      "email": "cse.tanmay@gmail.com"
+    },
+    {
+      "name": "Tanmay Chakrabarty",
+      "email": "tanmay@3-devs.com"
+    }
+  ],
+  "require": {
+    "php": "^7.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "ThreeDevs\\CallReturn\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ThreeDevs\\UnitTests\\": "tests"
+    }
+  },
+  "description": "Call Return"
+}
