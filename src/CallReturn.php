@@ -7,6 +7,7 @@ namespace ThreeDevs\CallReturn;
 class CallReturn
 {
     private ?string $status = 'success';
+    private int $status_code = 200;
     private array $error_messages = [];
     private array $success_messages = [];
     private $data = null;
@@ -14,6 +15,7 @@ class CallReturn
     public function __construct()
     {
         $this->status = 'success';
+        $this->status_code = 200;
         $this->error_messages = [];
         $this->success_messages = [];
         $this->data = null;
@@ -107,9 +109,19 @@ class CallReturn
         return $this->data;
     }
 
+    public function setStatusCode(int $code){
+        $this->status_code = $code;
+        return $this;
+    }
+
+    public function getStatusCode(){
+        return $this->status_code;
+    }
+
     public function get_in_array(): array
     {
-        $ret = ['status' => '', 'error' => [], 'success' => []];
+        $ret = ['status_code' => 0, 'status' => '', 'error' => [], 'success' => [], 'data' => null];
+        $ret['status_code'] = $this->getStatusCode();
         $ret['status'] = $this->is_error() ? 'error' : 'success';
         $ret['error'] = $this->get_error_message();
         $ret['success'] = $this->get_success_message();
