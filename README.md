@@ -1,3 +1,4 @@
+![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/three_devs/call_return?style=flat-square)  
 # CallReturn
 A handy object that can be used as common return object for function/method calls
 The object has status and status code, it can be used as common object for API call returns too
