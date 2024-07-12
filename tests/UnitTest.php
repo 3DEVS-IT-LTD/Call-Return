@@ -34,6 +34,29 @@ class UnitTest extends TestCase
         self::assertTrue($ret->is_success());
     }
 
+    public function testKeyValue()
+    {
+        $ret = new CallReturn();
+
+        $ret->add_data(['asd' => 'ONE']);
+
+        $ret->setKeyValueData('total', '100');
+        $ret->setKeyValueData('status', 'error');
+
+        $array = $ret->get_in_array();
+
+        self::assertTrue(
+            isset($array['status_code'])
+            && isset($array['status']) && $array['status'] == 'success'
+            && isset($array['error'])
+            && isset($array['error_code'])
+            && isset($array['success'])
+            && isset($array['success_code'])
+            && isset($array['data'])
+            && isset($array['total']) && $array['total'] == '100'
+        );
+    }
+
     public static function tearDownAfterClass(): void
     {
 

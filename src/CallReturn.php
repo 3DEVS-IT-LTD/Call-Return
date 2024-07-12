@@ -34,6 +34,7 @@ class CallReturn
     private array $success_messages = [];
     private array $success_codes = [];
     private $data = null;
+    private array $key_value_data = [];
 
     public function __construct()
     {
@@ -249,6 +250,29 @@ class CallReturn
     }
 
     /**
+     * @param string|null $key
+     * @return mixed
+     */
+    public function getKeyValueData(string $key = null): mixed
+    {
+        return is_null($key) ? $this->key_value_data : ($this->key_value_data[$key] ?? null);
+    }
+
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function setKeyValueData(string $key, mixed $value): CallReturn
+    {
+        $this->key_value_data[$key] = $value;
+        return $this;
+    }
+
+
+
+    /**
      * @return array [
      *  'status_code' => 200,
      *  'status' => 'success',
@@ -268,6 +292,6 @@ class CallReturn
         $ret['success_code'] = $this->get_success_codes();
         $ret['data'] = $this->get_data();
 
-        return $ret;
+        return array_merge($this->key_value_data, $ret);
     }
 }
