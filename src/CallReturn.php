@@ -284,13 +284,13 @@ class CallReturn
     public function get_in_array(): array
     {
         $ret = [];
-        $ret['status_code'] = $this->getStatusCode();
+        $ret['status_code'] = (int)$this->getStatusCode();
         $ret['status'] = $this->is_error() ? 'error' : 'success';
-        $ret['error'] = $this->get_error_message();
-        $ret['error_code'] = $this->get_error_codes();
-        $ret['success'] = $this->get_success_message();
-        $ret['success_code'] = $this->get_success_codes();
-        $ret['data'] = $this->get_data();
+        $ret['error'] = is_null($this->get_error_message()) ? [] : $this->get_error_message();
+        $ret['error_code'] = is_null($this->get_error_codes()) ? [] : $this->get_error_codes();
+        $ret['success'] = is_null($this->get_success_message()) ? [] : $this->get_success_message();
+        $ret['success_code'] = is_null($this->get_success_codes()) ? [] : $this->get_success_codes();
+        $ret['data'] = is_null($this->get_data()) ? [] : $this->get_data();
 
         return array_merge($this->key_value_data, $ret);
     }
