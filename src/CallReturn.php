@@ -305,4 +305,16 @@ class CallReturn
         echo json_encode($this->get_in_array());
         exit();
     }
+
+    public function headerJsonWithError($error)
+    {
+        $this->add_error($error);
+        $this->headerJson();
+    }
+
+    public function headerJsonWithSuccess($data = null, $message = null)
+    {
+        $this->add_success($data, $message);
+        $this->headerJson();
+    }
 }
