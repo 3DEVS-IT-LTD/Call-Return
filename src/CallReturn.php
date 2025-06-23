@@ -230,6 +230,9 @@ class CallReturn
      */
     public function getStatusCode()
     {
+        if($this->status_code == 200 && $this->is_error())
+            $this->status_code = 400;
+
         return $this->status_code;
     }
 
@@ -293,5 +296,13 @@ class CallReturn
         $ret['data'] = is_null($this->get_data()) ? [] : $this->get_data();
 
         return array_merge($this->key_value_data, $ret);
+    }
+
+    public function headerJson()
+    {
+        header('Content-Type: application/json');
+        http_response_code($this->getStatusCode());
+        echo json_encode($this->get_in_array());
+        exit();
     }
 }
